@@ -5,6 +5,14 @@
 //  Created by Jimmy on 3/5/14.
 //  Copyright (c) 2014 JimmyBouker. All rights reserved.
 //
+//
+//  Notes:
+//  The UITextField has it's delegate set to the ViewController
+//  You should see the code <UITextFieldDelegate> inside the ViewController.h
+//  This tells us that the ViewController class conforms to the UITextFieldDelegate Protocol
+//  Conforming to a Protocol in Objective C is the same as implementing and interface in Java
+//  By conforming to this protocol we can recieve events from the UITextField such as character input
+//
 
 #import "ViewController.h"
 
@@ -85,9 +93,15 @@
 
 #pragma mark - UITextFieldDelegate
 
+/*
+ * This method is called every time a user enters a character
+ */
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    //get the new text from the textfield
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     float num = [newString floatValue];
+    
+    //now call the appropriate method
     if(lastButtonHitWasMPH) {
         [self performCalcFromKPH:num];
     }
